@@ -1,41 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using static globalVariables;
 
 public class Light_Script : MonoBehaviour
 {
     float x = 0;
-    float velocidad = 1;
 
+    private globalVariables globalVariables;
     // Start is called before the first frame update
     void Start()
     {
-    }
+        globalVariables =  GameObject.Find("Plane").GetComponent<globalVariables>();
 
+    }
     
     void Update () {
-            x += Time.deltaTime * 30 * velocidad;
+            x = globalVariables.getHoraDelDia();
             transform.rotation = Quaternion.Euler(x,0,0);
-            if(x > 360) x=0;
-    }
-
-    public void toggleNocheDia(){
-        pararTiempo();
-    
-        if (x > 200){   // Si es de noche hacer de día       
-            x = 100;
-            transform.rotation = Quaternion.Euler(x,0,0);
-        }else{ // Si es de día hacer de noche
-            x = 200;
-            transform.rotation = Quaternion.Euler(x,0,0);
-        }
-    
-    }
-
-    public void pararTiempo(){
-        if(velocidad == 1) velocidad = 0;
-        else velocidad = 1;
     }
 
 }

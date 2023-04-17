@@ -3,32 +3,29 @@ using UnityEngine.UI;
 
 public class botonPararScript : MonoBehaviour
 {
-    public RawImage buttonIcon;
-    public Texture playIcon;
-    public Texture pauseIcon;
-    private bool isPlaying = true;
+    
+    public Texture2D pauseIcon;
+    public Texture2D playIcon;
+
+    private RawImage rawImage;
+    private bool isSelected = false;
 
     void Start()
     {
-        // Asignamos el icono de play al inicio
-        buttonIcon.texture = playIcon;
-
+        rawImage = GetComponentInChildren<RawImage>();
+        rawImage.texture = playIcon;
     }
 
-    public void OnClick()
+    public void OnButtonClick()
     {
-        // Cambiamos el icono y el estado de reproducción
-        if (isPlaying)
+        if (isSelected)
         {
-            buttonIcon.texture = pauseIcon;
-            isPlaying = false;
-            // Aquí iría el código para pausar la reproducción
-        }
-        else
+            rawImage.texture = pauseIcon;
+            isSelected = true;
+        }else
         {
-            buttonIcon.texture = playIcon;
-            isPlaying = true;
-            // Aquí iría el código para reanudar la reproducción
+            rawImage.texture = playIcon;
+            isSelected = false;
         }
     }
 }
