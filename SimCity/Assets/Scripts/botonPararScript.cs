@@ -12,20 +12,21 @@ public class botonPararScript : MonoBehaviour
 
     void Start()
     {
-        rawImage = GetComponentInChildren<RawImage>();
-        rawImage.texture = playIcon;
+        rawImage = GetComponent<RawImage>();
+        rawImage.texture = pauseIcon;
     }
 
-    public void OnButtonClick()
-    {
-        if (isSelected)
-        {
+    void Update(){
+        if(isSelected){
             rawImage.texture = pauseIcon;
-            isSelected = true;
-        }else
-        {
+        }else{
             rawImage.texture = playIcon;
-            isSelected = false;
-        }
+            }
+
+    }
+
+    public void changeBoton()
+    {
+        isSelected = !isSelected;
     }
 }

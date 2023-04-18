@@ -9,7 +9,7 @@ public class farolasScript : MonoBehaviour
     private globalVariables globalVariables;
     public bool farolaOn;
     public bool automaticFaroleishions; 
-    private float horaDelDia;
+    private string horaDelDia;
 
     // Start is called before the first frame update
     void Start()
@@ -22,9 +22,10 @@ public class farolasScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        horaDelDia = globalVariables.getHoraDelDia();
+        horaDelDia = globalVariables.getHoraDelDiaHHMMSS().Substring(0,2);
+        int hora = int.Parse(horaDelDia);
         if(automaticFaroleishions){
-            if (horaDelDia >= 145 || horaDelDia < 30){   // Si es de noche encender farolas    
+            if (hora<8 || hora>=19){   // Si es de noche encender farolas    
                 farolaOn = true;
             }else{ // Si es de día apagar farolas
                 farolaOn = false;

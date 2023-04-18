@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static globalVariables;
+using System;
 
 public class Light_Script : MonoBehaviour
 {
@@ -16,8 +17,8 @@ public class Light_Script : MonoBehaviour
     }
     
     void Update () {
-            x = globalVariables.getHoraDelDia();
-            transform.rotation = Quaternion.Euler(x,0,0);
+        x = (float)Math.Sin(((globalVariables.getHoraDelDia())/(229.18266f)))*360f;
+        transform.rotation = Quaternion.Euler(x+180,0,0);
     }
 
 }
