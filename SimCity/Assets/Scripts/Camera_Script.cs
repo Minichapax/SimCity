@@ -4,31 +4,45 @@ using UnityEngine;
 
 public class Camera_Script : MonoBehaviour {
 
-	//Declaro la variable de tipo RigidBody que luego asociaremos a nuestro Jugador
-	private Rigidbody rb;
+	private float moveSpeed = 10.0f;
+	private float zoomSpeed = 7.0f; 
 
-	//Declaro la variable pública velocidad para poder modificarla desde la Inspector window
-	[Range(1,10)]
-	public float velocidad = 5;
+	private Vector3 lastMousePosition;
+	private Quaternion originalRotation; // variable que guarda la rotación original
 
-	void Start () {
 
-		//Capturo el rigidbody del jugador al iniciar el juego
-		rb = GetComponent<Rigidbody>();
-		
+	void Start()
+	{
+		lastMousePosition = Input.mousePosition;
+		originalRotation = transform.rotation; // guarda la rotación original
+
 	}
 	
-	void FixedUpdate () {
+	void LateUpdate()
+	{
+		Vector3 mousePosition = Input.mousePosition;
+		Vector3 delta = mousePosition - lastMousePosition;
+		delta *= moveSpeed * Time.deltaTime;
 
-		//Capturo el movimiento en horizontal y vertical de nuestro teclado
-		float movimientoH = Input.GetAxis("Horizontal");
-		float movimientoV = Input.GetAxis("Vertical");
+		float zoom = Input.GetAxis("Mouse ScrollWheel");
+		transform.Translate(0, 0, zoom*zoomSpeed);
 
-		//Genero el vector de movimiento asociado, teniendo en cuenta la velocidad
-		Vector3 movimiento = new Vector3(movimientoH * velocidad, 0.0f, movimientoV * velocidad);
+		if (Input.GetMouseButton(0))
+		{
+			Quaternion originalRotationTemp = transform.rotation; // guarda la rotación actual de la cámara
+			transform.rotation = originalRotation;
+			transform.Translate(-delta.x, -delta.y, 0);
+			transform.rotation = originalRotationTemp;
+		}
 
-		//Aplico ese movimiento al RigidBody del jugador
-		rb.AddForce(movimiento);
-		
+		if (Input.GetMouseButton(1))
+		{			
+			transform.Rotate(-delta.y , 0, 0);
+		}
+
+		lastMousePosition = mousePosition;
 	}
+
+	
+
 }   
