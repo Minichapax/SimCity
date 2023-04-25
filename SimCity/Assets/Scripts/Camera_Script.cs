@@ -31,7 +31,7 @@ public class Camera_Script : MonoBehaviour {
 		{
 			Quaternion originalRotationTemp = transform.rotation; // guarda la rotación actual de la cámara
 			transform.rotation = originalRotation;
-			transform.Translate(-delta.x, -delta.y, 0);
+			transform.Translate(-delta.x, 0 , -delta.y);
 			transform.rotation = originalRotationTemp;
 		}
 
@@ -41,8 +41,32 @@ public class Camera_Script : MonoBehaviour {
 		}
 
 		lastMousePosition = mousePosition;
-	}
-
 	
 
+		if(transform.position.x < -30){
+			transform.position = new Vector3(-30, transform.position.y, transform.position.z);
+		}
+		if(transform.position.x > 30){
+			transform.position = new Vector3(30, transform.position.y, transform.position.z);
+		}
+		if(transform.position.y < 5){
+			transform.position = new Vector3(transform.position.x,5, transform.position.z);
+		}
+		if(transform.position.y > 60){
+			transform.position = new Vector3(transform.position.x, 60, transform.position.z);
+		}
+		if(transform.position.z < -30){
+			transform.position = new Vector3(transform.position.x, transform.position.y, -30);
+		}
+		if(transform.position.z > 30){
+			transform.position = new Vector3(transform.position.x, transform.position.y, 30);
+		}
+		Debug.Log(transform.rotation.eulerAngles);
+		if(transform.rotation.eulerAngles.y > 0 ){ 
+			transform.rotation = Quaternion.Euler(90, 0, 0);
+		}
+		if(transform.rotation.eulerAngles.x < 5){ 
+			transform.rotation = Quaternion.Euler(5, 0, 0);
+		}
+	}
 }   
