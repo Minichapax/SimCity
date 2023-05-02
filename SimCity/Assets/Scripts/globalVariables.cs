@@ -7,19 +7,19 @@ public class globalVariables : MonoBehaviour
 {
 
     private float horaDelDia; //   30º Dia 145º Noche 30º
-    private int velocidadDia = 15;
+    public int velocidadDia = 10000;
     private int dia = 0;
     // Start is called before the first frame update
     void Start()
     {
-        horaDelDia = 30;
+        horaDelDia = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         horaDelDia += Time.deltaTime * velocidadDia;
-        if (horaDelDia >= 360){ 
+        if (horaDelDia >= 86400){ 
             horaDelDia = 0;
             dia += 1;
         }
@@ -31,9 +31,9 @@ public class globalVariables : MonoBehaviour
 
     public string getHoraDelDiaHHMMSS(){
 
-        int hora = Mathf.FloorToInt(horaDelDia/15f);
-        int minutos = Mathf.FloorToInt((horaDelDia-hora*15f)/0.25f);
-        int segundos = Mathf.FloorToInt((horaDelDia-hora*15f-minutos*0.25f)/0.00416F);
+        int hora = Mathf.FloorToInt(horaDelDia/3600);
+        int minutos = Mathf.FloorToInt((horaDelDia-hora*3600)/60);
+        int segundos = Mathf.FloorToInt((horaDelDia-hora*3600-minutos*60));
 
         string result = string.Format("{0}:{1}:{2}", hora.ToString("D2"), minutos.ToString("D2"), segundos.ToString("D2"));
 
@@ -49,10 +49,10 @@ public class globalVariables : MonoBehaviour
 
     public void toggleNocheDia(){
     
-        if (horaDelDia >= 175 || horaDelDia < 20){   // Si es de noche hacer de día       
-            horaDelDia = 20;
+        if (horaDelDia >= 68400 || horaDelDia < 32400){   // Si es de noche hacer de día       
+            horaDelDia = 32400;
         }else{ // Si es de día hacer de noche
-            horaDelDia = 175;
+            horaDelDia = 68400;
         }
     
     }

@@ -17,7 +17,7 @@ public class Light_Script : MonoBehaviour
     }
     
     void Update () {
-        x = (float)Math.Sin(((globalVariables.getHoraDelDia())/(229.18266f)))*360f;
+        x = (float)Math.Sin(((globalVariables.getHoraDelDia()*360/86400)/(229.18266f)))*360f;
         transform.rotation = Quaternion.Euler(x+180,0,0);
     }
 

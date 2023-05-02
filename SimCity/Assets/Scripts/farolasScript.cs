@@ -25,7 +25,7 @@ public class farolasScript : MonoBehaviour
         horaDelDia = globalVariables.getHoraDelDiaHHMMSS().Substring(0,2);
         int hora = int.Parse(horaDelDia);
         if(automaticFaroleishions){
-            if (hora<8 || hora>=19){   // Si es de noche encender farolas    
+            if (hora < 9 || hora>=19){   // Si es de noche encender farolas    
                 farolaOn = true;
             }else{ // Si es de día apagar farolas
                 farolaOn = false;
