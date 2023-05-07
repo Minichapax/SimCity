@@ -14,6 +14,8 @@ public class RutaAutobus : MonoBehaviour
     static Vector3 posicionAnterior;
     float distancia;
     private globalVariables globalVariables;
+    private bool parada;
+    private float tiempoParada;
 
 
     // Start is called before the first frame update
@@ -38,18 +40,32 @@ public class RutaAutobus : MonoBehaviour
         coche.transform.LookAt(posicionActual);
         coche.transform.Rotate(0, -90, 0);
         distancia = Vector3.Distance(posicionAnterior,posicionActual);
-
+        if(actual == 1 || actual == 6 || actual == 16 || actual == 20 || actual == 27 || actual == 31){
+            parada = true;
+            tiempoParada = 0.0f;
+        }
     }
 
     // Update is called once per frame
     void Update(){
-        tiempo += Time.deltaTime * globalVariables.velocidadDia * velocidadCoche / (distancia*15);
-        
-        if(coche.transform.position != posicionActual){
-            coche.transform.position = Vector3.Lerp(posicionAnterior, posicionActual, tiempo);
-        }
-        else{
-            CheckNode();
+        if(parada){
+            tiempoParada += Time.deltaTime*globalVariables.velocidadDia;
+            if(tiempoParada > 15.0f) parada = false;
+
+        }else{
+            tiempo += Time.deltaTime * globalVariables.velocidadDia * velocidadCoche / (distancia*15);
+            
+            if(coche.transform.position != posicionActual){
+                coche.transform.position = Vector3.Lerp(posicionAnterior, posicionActual, tiempo);
+            }
+            else{
+                CheckNode();
+            }
+            if(globalVariables.getHoraDelDia()  >= 82800 || globalVariables.getHoraDelDia() < 23400){
+                coche.SetActive(false);
+            }else{
+                coche.SetActive(true);
+            }
         }
     }
 }
