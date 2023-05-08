@@ -9,7 +9,7 @@ public class Camera_Script : MonoBehaviour {
 
 	private Vector3 lastMousePosition;
 	private Quaternion originalRotation; // variable que guarda la rotación original
-
+	public bool canMoveCamera = true;
 
 	void Start()
 	{
@@ -20,54 +20,56 @@ public class Camera_Script : MonoBehaviour {
 	
 	void LateUpdate()
 	{
-		Vector3 mousePosition = Input.mousePosition;
-		Vector3 delta = mousePosition - lastMousePosition;
-		delta *= moveSpeed * Time.deltaTime;
+		if(canMoveCamera){
+			Vector3 mousePosition = Input.mousePosition;
+			Vector3 delta = mousePosition - lastMousePosition;
+			delta *= moveSpeed * Time.deltaTime;
 
-		float zoom = Input.GetAxis("Mouse ScrollWheel");
-		Quaternion zoomOriginalRotationTemp = transform.rotation; // guarda la rotación actual de la cámara
-		transform.rotation = originalRotation;
-		transform.Translate(0,0, zoom*zoomSpeed);
-		transform.rotation = zoomOriginalRotationTemp;
-
-		if (Input.GetMouseButton(0))
-		{
-			Quaternion originalRotationTemp = transform.rotation; // guarda la rotación actual de la cámara
+			float zoom = Input.GetAxis("Mouse ScrollWheel");
+			Quaternion zoomOriginalRotationTemp = transform.rotation; // guarda la rotación actual de la cámara
 			transform.rotation = originalRotation;
-			transform.Translate(-delta.x, -delta.y , 0);
-			transform.rotation = originalRotationTemp;
-		}
+			transform.Translate(0,0, zoom*zoomSpeed);
+			transform.rotation = zoomOriginalRotationTemp;
 
-		if (Input.GetMouseButton(1))
-		{			
-			transform.Rotate(-delta.y , 0, 0);
-		}
+			if (Input.GetMouseButton(0))
+			{
+				Quaternion originalRotationTemp = transform.rotation; // guarda la rotación actual de la cámara
+				transform.rotation = originalRotation;
+				transform.Translate(-delta.x, -delta.y , 0);
+				transform.rotation = originalRotationTemp;
+			}
 
-		lastMousePosition = mousePosition;
+			if (Input.GetMouseButton(1))
+			{			
+				transform.Rotate(-delta.y , 0, 0);
+			}
 
-		if(transform.position.x < -30){
-			transform.position = new Vector3(-30, transform.position.y, transform.position.z);
-		}
-		if(transform.position.x > 30){
-			transform.position = new Vector3(30, transform.position.y, transform.position.z);
-		}
-		if(transform.position.y < 5){
-			transform.position = new Vector3(transform.position.x,5, transform.position.z);
-		}
-		if(transform.position.y > 60){
-			transform.position = new Vector3(transform.position.x, 60, transform.position.z);
-		}
-		if(transform.position.z < -30){
-			transform.position = new Vector3(transform.position.x, transform.position.y, -30);
-		}
-		if(transform.position.z > 30){
-			transform.position = new Vector3(transform.position.x, transform.position.y, 30);
-		}
-		if(transform.rotation.eulerAngles.y > 0 ){ 
-			transform.rotation = Quaternion.Euler(90, 0, 0);
-		}
-		if(transform.rotation.eulerAngles.x < 5){ 
-			transform.rotation = Quaternion.Euler(5, 0, 0);
+			lastMousePosition = mousePosition;
+
+			if(transform.position.x < -30){
+				transform.position = new Vector3(-30, transform.position.y, transform.position.z);
+			}
+			if(transform.position.x > 30){
+				transform.position = new Vector3(30, transform.position.y, transform.position.z);
+			}
+			if(transform.position.y < 5){
+				transform.position = new Vector3(transform.position.x,5, transform.position.z);
+			}
+			if(transform.position.y > 60){
+				transform.position = new Vector3(transform.position.x, 60, transform.position.z);
+			}
+			if(transform.position.z < -30){
+				transform.position = new Vector3(transform.position.x, transform.position.y, -30);
+			}
+			if(transform.position.z > 30){
+				transform.position = new Vector3(transform.position.x, transform.position.y, 30);
+			}
+			if(transform.rotation.eulerAngles.y > 0 ){ 
+				transform.rotation = Quaternion.Euler(90, 0, 0);
+			}
+			if(transform.rotation.eulerAngles.x < 5){ 
+				transform.rotation = Quaternion.Euler(5, 0, 0);
+			}
 		}
 	}
 }   

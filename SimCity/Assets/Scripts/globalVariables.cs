@@ -9,6 +9,8 @@ public class globalVariables : MonoBehaviour
     private float horaDelDia; //   30º Dia 145º Noche 30º
     public int velocidadDia = 10000;
     private int dia = 0;
+    public Camera_Script cameraScript;
+    private float tiempoMoveCamera;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +25,8 @@ public class globalVariables : MonoBehaviour
             horaDelDia = 0;
             dia += 1;
         }
+        tiempoMoveCamera += Time.deltaTime;
+        if(tiempoMoveCamera > 1) cameraScript.canMoveCamera = true;
     }
 
     public DateTime getDia(){
@@ -57,4 +61,9 @@ public class globalVariables : MonoBehaviour
     
     }
 
+    public void changeVelocidad(float velocidad){
+        cameraScript.canMoveCamera = false;
+        tiempoMoveCamera = 0.0f;
+        velocidadDia = (int) velocidad;
+    }
 }
