@@ -6,21 +6,26 @@ public class Camera_Script : MonoBehaviour {
 
 	private float moveSpeed = 10.0f;
 	private float zoomSpeed = 7.0f; 
-
+	public GameObject edificios;
 	private Vector3 lastMousePosition;
 	private Quaternion originalRotation; // variable que guarda la rotación original
 	public bool canMoveCamera = true;
-
+	public bool canMoveCamera2 = true;
+	private Edificio[] pathEdificios;
+	private int numeroCamera = 0; 
+	private Vector3 ultimaPosicion;
+	private Quaternion ultimaRotation;
 	void Start()
 	{
 		lastMousePosition = Input.mousePosition;
 		originalRotation = transform.rotation; // guarda la rotación original
+		pathEdificios = edificios.GetComponentsInChildren<Edificio>();
 
 	}
 	
 	void LateUpdate()
 	{
-		if(canMoveCamera){
+		if(canMoveCamera && canMoveCamera2){
 			Vector3 mousePosition = Input.mousePosition;
 			Vector3 delta = mousePosition - lastMousePosition;
 			delta *= moveSpeed * Time.deltaTime;
@@ -71,5 +76,31 @@ public class Camera_Script : MonoBehaviour {
 				transform.rotation = Quaternion.Euler(5, 0, 0);
 			}
 		}
+	}
+
+	public void botonCamera(){
+
+			if(numeroCamera == 0){
+				ultimaPosicion = transform.position;
+				ultimaRotation = transform.rotation;
+				canMoveCamera2 = false;
+			}
+
+			if(numeroCamera == pathEdificios.Length-1){
+				canMoveCamera2 = true;
+				transform.position = ultimaPosicion;
+				transform.rotation = ultimaRotation;
+				numeroCamera = 0;
+			}else{
+
+				Vector3 direccionObjeto = pathEdificios[numeroCamera].transform.forward;
+			
+				direccionObjeto = Vector3.Normalize(direccionObjeto);
+				Vector3 posicionCamara = pathEdificios[numeroCamera].transform.position + direccionObjeto * 5f;
+				posicionCamara.y+=4;
+				transform.position = posicionCamara;
+				transform.LookAt(pathEdificios[numeroCamera].transform.position);
+				numeroCamera += 1;
+			}
 	}
 }   

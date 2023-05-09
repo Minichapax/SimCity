@@ -5,7 +5,13 @@ using UnityEngine;
 public class RutaCoche : MonoBehaviour
 {
     Node[] pathNode;
-    public GameObject coche;
+    private GameObject coche;
+    public GameObject coche1;
+    public GameObject coche2;
+    public GameObject coche3;
+    public GameObject coche4;
+    public GameObject coche5;
+
     public float velocidadCoche;
     float tiempo;
     int actual;
@@ -26,24 +32,42 @@ public class RutaCoche : MonoBehaviour
         actual = 0;
         tiempo = 0;
         pathNode = GetComponentsInChildren<Node>();
+        coche1.SetActive(false);
+        coche2.SetActive(false);
+        coche3.SetActive(false);
+        coche4.SetActive(false);
+        coche5.SetActive(false);
         CheckNode();
     }
 
     void CheckNode(){
+        
+
         tiempo=0;
         anterior = actual;
         actual++;
+
+        if(anterior == 0){
+            int cochelere = Random.Range(1, 6);
+            if (cochelere == 1) coche = coche1;
+            if (cochelere == 2) coche = coche2;
+            if (cochelere == 3) coche = coche3;
+            if (cochelere == 4) coche = coche4;
+            if (cochelere == 5) coche = coche5;
+        }
+
         if(actual == pathNode.Length){ 
             actual = 0;
         }
         posicionAnterior = pathNode[anterior].transform.position;
         posicionActual = pathNode[actual].transform.position;
         coche.transform.LookAt(posicionActual);
+        coche.transform.Rotate(0, -90, 0);
         distancia = Vector3.Distance(posicionAnterior,posicionActual);
         if(actual == 0){
             parada = true;
             tiempoParada = 0.0f;
-            randomParada = Random.Range(500f, 2000f);
+            randomParada = Random.Range(50f, 100f);
             coche.SetActive(false);
         }
         if(anterior == 0){
