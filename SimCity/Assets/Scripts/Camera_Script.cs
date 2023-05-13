@@ -15,6 +15,8 @@ public class Camera_Script : MonoBehaviour {
 	private int numeroCamera = 0; 
 	private Vector3 ultimaPosicion;
 	private Quaternion ultimaRotation;
+	public panelCanvasEdificio panelObj;
+
 	void Start()
 	{
 		lastMousePosition = Input.mousePosition;
@@ -78,6 +80,12 @@ public class Camera_Script : MonoBehaviour {
 		}
 	}
 
+	void Update(){
+		if(!canMoveCamera2){
+			string text = pathEdificios[numeroCamera-1].getString();
+			panelObj.UpdateTexts(text);
+		}
+	}
 	public void botonCamera(){
 
 			if(numeroCamera == 0){
@@ -102,5 +110,13 @@ public class Camera_Script : MonoBehaviour {
 				transform.LookAt(pathEdificios[numeroCamera].transform.position);
 				numeroCamera += 1;
 			}
+			if(!canMoveCamera2){
+				panelObj.setActive(true);
+				string text = pathEdificios[numeroCamera-1].getString();
+				panelObj.UpdateTexts(text);
+			}else{
+				panelObj.setActive(false);
+			}
+
 	}
 }   
