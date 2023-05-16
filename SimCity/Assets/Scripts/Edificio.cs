@@ -62,11 +62,11 @@ public class Edificio : MonoBehaviour
 
     private void updateValues(){
         fecha = globalVariables.getDia();
-        Contaminacion = UnityEngine.Random.Range(50f, 100f);
-        ConsumoLuz = UnityEngine.Random.Range(200f, 300f);
-        ConsumoAgua = UnityEngine.Random.Range(200f, 300f);
-        ConsumoGas = UnityEngine.Random.Range(200f, 300f);
-        Temperatura  = UnityEngine.Random.Range(10f, 30f);
+        Contaminacion = UnityEngine.Random.Range(50f, 55f);// + cocheCerca;
+        ConsumoLuz = UnityEngine.Random.Range(200f, 210f);//cambiar a w/h
+        ConsumoAgua = UnityEngine.Random.Range(160f, 170f);//l/h
+        ConsumoGas = UnityEngine.Random.Range(230f, 240f);//l/h
+        Temperatura  = UnityEngine.Random.Range(10f, 14f);
     }
 
     public void insertSensores()
