@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Camera_Script : MonoBehaviour {
 
-	private float moveSpeed = 10.0f;
+	private float moveSpeed = .5f;
 	private float zoomSpeed = 7.0f; 
 	public GameObject edificios;
 	private Vector3 lastMousePosition;
@@ -53,8 +53,8 @@ public class Camera_Script : MonoBehaviour {
 
 			lastMousePosition = mousePosition;
 
-			if(transform.position.x < -30){
-				transform.position = new Vector3(-30, transform.position.y, transform.position.z);
+			if(transform.position.x < -37){
+				transform.position = new Vector3(-37, transform.position.y, transform.position.z);
 			}
 			if(transform.position.x > 30){
 				transform.position = new Vector3(30, transform.position.y, transform.position.z);

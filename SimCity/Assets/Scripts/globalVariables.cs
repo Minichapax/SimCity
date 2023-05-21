@@ -7,7 +7,9 @@ public class globalVariables : MonoBehaviour
 {
 
     private float horaDelDia; //   30º Dia 145º Noche 30º
-    public int velocidadDia = 10000;
+    public int velocidadAnterior = 1;
+
+    public int velocidadDia = 1;
     private int dia = 0;
     public Camera_Script cameraScript;
     private float tiempoMoveCamera;
@@ -30,7 +32,7 @@ public class globalVariables : MonoBehaviour
     }
 
     public DateTime getDia(){
-        return DateTime.Today.AddDays(dia);
+        return DateTime.Today.AddDays(dia).AddSeconds(horaDelDia);
     }
 
     public string getHoraDelDiaHHMMSS(){
@@ -47,8 +49,11 @@ public class globalVariables : MonoBehaviour
     public float getHoraDelDia(){ return horaDelDia; }
     
     public void pararTiempo(){
-        if(velocidadDia != 0) velocidadDia = 0;
-        else velocidadDia = 30;
+        if(velocidadDia != 0){ 
+            velocidadAnterior = velocidadDia;
+            velocidadDia = 0; 
+        }
+        else velocidadDia = velocidadAnterior;
     }
 
     public void toggleNocheDia(){
@@ -64,6 +69,37 @@ public class globalVariables : MonoBehaviour
     public void changeVelocidad(float velocidad){
         cameraScript.canMoveCamera = false;
         tiempoMoveCamera = 0.0f;
-        velocidadDia = (int) velocidad;
+        switch(velocidad){
+            case 1:
+                velocidadDia = 1;
+            break;
+            case 2:
+                velocidadDia = 2;
+            break;
+            case 3:
+                velocidadDia = 4;
+            break;
+            case 4:
+                velocidadDia = 60;
+            break;
+            case 5:
+                velocidadDia = 300;
+            break;
+            case 6:
+                velocidadDia = 1800;
+            break;
+            case 7:
+                velocidadDia = 3600;
+            break;
+            case 8:
+                velocidadDia = 18000;
+            break;
+            case 9:
+                velocidadDia = 43200;
+            break;
+            case 10:
+                velocidadDia = 86400;
+            break;
+        }
     }
 }

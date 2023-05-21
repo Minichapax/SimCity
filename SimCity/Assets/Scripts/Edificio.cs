@@ -16,6 +16,7 @@ public class Edificio : MonoBehaviour
     private float Temperatura;
     private DateTime fecha;
     
+    private bool cocheCerca = false;
     private float time = 0f;
     private globalVariables globalVariables;
 
@@ -31,11 +32,11 @@ public class Edificio : MonoBehaviour
         string text = "Edificio: "+ Nombre +
         "\nCalle: " + Calle +
         "\nCampus: " + Campus +
-        "\nContaminacion: "+Contaminacion+
-        "\nConsumoLuz: "+ConsumoLuz+
-        "\nConsumoAgua: "+ConsumoAgua+
-        "\nConsumoGas: "+ConsumoGas+
-        "\nTemperatura: "+Temperatura;
+        "\nContaminacion: "+Contaminacion.ToString("F2")+
+        "\nConsumoLuz: "+ConsumoLuz.ToString("F2")+ "w/h" +
+        "\nConsumoAgua: "+ConsumoAgua.ToString("F2")+"l/h" +
+        "\nConsumoGas: "+ConsumoGas.ToString("F2")+"l/h" +
+        "\nTemperatura: "+Temperatura.ToString("F1")+ "ºC";
         return text;
     }
     void Start(){
@@ -63,10 +64,17 @@ public class Edificio : MonoBehaviour
     private void updateValues(){
         fecha = globalVariables.getDia();
         Contaminacion = UnityEngine.Random.Range(50f, 55f);// + cocheCerca;
+        if(cocheCerca){ 
+            Contaminacion += UnityEngine.Random.Range(30f, 40f);
+            Debug.Log(gameObject.name + Contaminacion);
+        }
         ConsumoLuz = UnityEngine.Random.Range(200f, 210f);//cambiar a w/h
         ConsumoAgua = UnityEngine.Random.Range(160f, 170f);//l/h
         ConsumoGas = UnityEngine.Random.Range(230f, 240f);//l/h
-        Temperatura  = UnityEngine.Random.Range(10f, 14f);
+        Temperatura  = UnityEngine.Random.Range(15f, 19f);
+        if(globalVariables.getHoraDelDia()  >= 82800 || globalVariables.getHoraDelDia() < 23400){
+            Temperatura  = UnityEngine.Random.Range(10f, 14f);
+        }
     }
 
     public void insertSensores()
@@ -105,5 +113,10 @@ public class Edificio : MonoBehaviour
             updateValues();
             insertSensores();
         }
+    }
+
+    public void nearCoche(bool value)
+    {
+        cocheCerca = value;
     }
 }
