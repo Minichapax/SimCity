@@ -15,8 +15,7 @@ public class panelCanvasEdificio : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void UpdateTexts(string text)
-    {
+    public void UpdateTexts(string text){
         myTextMesh.text = text;
     }
 

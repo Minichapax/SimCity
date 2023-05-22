@@ -35,50 +35,50 @@ public class RutaAutobus : MonoBehaviour
 
 
     // Start is called before the first frame update
-    static NpgsqlConnection GetConnection()
-    {
-        string connectionString = "Host=localhost;Username=alumnogreibd;Password=greibd2015;Database=campusInteligente";
-        NpgsqlConnection connection = new NpgsqlConnection(connectionString);
-        return connection;
-    }
+    // static NpgsqlConnection GetConnection()
+    // {
+    //     string connectionString = "Host=localhost;Username=alumnogreibd;Password=greibd2015;Database=campusInteligente";
+    //     NpgsqlConnection connection = new NpgsqlConnection(connectionString);
+    //     return connection;
+    // }
 
     private void insertParadas(int parada){
-        using (NpgsqlConnection connection = GetConnection())
-        {
-            connection.Open();
-            string queryInsert = "INSERT INTO parada_transporte VALUES (1, @Parada, @Fecha)";
-            string paradastring = "Parada 1";
-            using (NpgsqlCommand command = new NpgsqlCommand(queryInsert, connection))
-            {
-                switch(parada){
-                    case 1:
-                        paradastring = "Parada 1";
-                    break;
-                    case 6:
-                        paradastring = "Parada 2";
-                    break;
-                    case 16:
-                        paradastring = "Parada 3";
-                    break;
-                    case 20:
-                        paradastring = "Parada 4";
-                    break;
-                    case 27:
-                        paradastring = "Parada 5";
-                    break;
-                    case 31:
-                        paradastring = "Parada 6";
-                    break;
-                    default:
-                        paradastring = "Parada unknown";
-                    break;
-                }
-                command.Parameters.AddWithValue("@Parada", paradastring);
-                command.Parameters.AddWithValue("@Fecha", globalVariables.getDia());
-                command.ExecuteNonQuery();
-            }
-            connection.Close();
-        }
+        // using (NpgsqlConnection connection = GetConnection())
+        // {
+        //     connection.Open();
+        //     string queryInsert = "INSERT INTO parada_transporte VALUES (1, @Parada, @Fecha)";
+        //     string paradastring = "Parada 1";
+        //     using (NpgsqlCommand command = new NpgsqlCommand(queryInsert, connection))
+        //     {
+        //         switch(parada){
+        //             case 1:
+        //                 paradastring = "Parada 1";
+        //             break;
+        //             case 6:
+        //                 paradastring = "Parada 2";
+        //             break;
+        //             case 16:
+        //                 paradastring = "Parada 3";
+        //             break;
+        //             case 20:
+        //                 paradastring = "Parada 4";
+        //             break;
+        //             case 27:
+        //                 paradastring = "Parada 5";
+        //             break;
+        //             case 31:
+        //                 paradastring = "Parada 6";
+        //             break;
+        //             default:
+        //                 paradastring = "Parada unknown";
+        //             break;
+        //         }
+        //         command.Parameters.AddWithValue("@Parada", paradastring);
+        //         command.Parameters.AddWithValue("@Fecha", globalVariables.getDia());
+        //         command.ExecuteNonQuery();
+        //     }
+        //     connection.Close();
+        // }
 
     } 
 
