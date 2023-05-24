@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Emergencia : MonoBehaviour
 {
+    public string Nombre;
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +15,9 @@ public class Emergencia : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public string getNombre(){
+        return Nombre;
     }
 }

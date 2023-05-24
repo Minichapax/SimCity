@@ -119,4 +119,14 @@ public class Camera_Script : MonoBehaviour {
 			}
 
 	}
+
+	public void reiniciarCamara(){
+		if(numeroCamera != 0){
+			panelObj.setActive(false);
+			canMoveCamera2 = true;
+			transform.position = ultimaPosicion;
+			transform.rotation = ultimaRotation;
+			numeroCamera = 0;
+		}
+	}
 }   

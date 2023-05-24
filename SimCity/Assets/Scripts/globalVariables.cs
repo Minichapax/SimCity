@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using System.Globalization;
 
 public class globalVariables : MonoBehaviour
 {
@@ -29,6 +30,13 @@ public class globalVariables : MonoBehaviour
         }
         tiempoMoveCamera += Time.deltaTime;
         if(tiempoMoveCamera > 1) cameraScript.canMoveCamera = true;
+    }
+
+    public string getDiaSemana(){
+        CultureInfo culture = new CultureInfo("es-ES");
+        DateTime today = DateTime.Today.AddDays(dia).AddSeconds(horaDelDia);
+        string textoDia = culture.DateTimeFormat.GetDayName(today.DayOfWeek);
+        return textoDia.ToUpper();
     }
 
     public DateTime getDia(){
