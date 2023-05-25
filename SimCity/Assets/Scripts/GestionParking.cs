@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Npgsql;
 
 public class GestionParking : MonoBehaviour
 {
@@ -35,6 +36,14 @@ public class GestionParking : MonoBehaviour
     private RawImage rawImage;
     private float tiempoHora=0;
     // Start is called before the first frame update
+
+    static NpgsqlConnection GetConnection()
+    {
+        string connectionString = "Host=localhost;Username=alumnogreibd;Password=greibd2015;Database=campusInteligente";
+         NpgsqlConnection connection = new NpgsqlConnection(connectionString);
+         return connection;
+    }
+
     void Start()
     {
         globalVariables =  GameObject.Find("Plane").GetComponent<globalVariables>();
@@ -60,13 +69,41 @@ public class GestionParking : MonoBehaviour
     }
 
     private void comprobarSalida(){
+        float diferencia = -1;
         if(datosParking[cocheUso].tiempoEstacionamiento < datosParking[cocheUso].tiempoReal){
-            float diferencia = (datosParking[cocheUso].tiempoReal - datosParking[cocheUso].tiempoEstacionamiento)/60;
-            string textoMulta = "El coche "+ coches[cocheUso].getMatricula() + " se ha pasado " + diferencia + " minutos.\n";
+            diferencia = (datosParking[cocheUso].tiempoReal - datosParking[cocheUso].tiempoEstacionamiento)/60;
+            string textoMulta = "El coche "+ coches[cocheUso].getMatricula() + " se ha pasado " + diferencia.ToString("F2") + " minutos.\n";
             multa[cocheUso] = textoMulta;
         }
         cocheMovimiento=false;
-    }
+
+        globalVariables =  GameObject.Find("Plane").GetComponent<globalVariables>();
+        
+        using (NpgsqlConnection connection = GetConnection())
+        {
+            connection.Open();
+            string queryInsert = "INSERT INTO coche (matricula, fecha_y_hora_de_entrada, fecha_y_hora_de_salida,multa,  tiempo_pagado, id_parking )"+
+                                "VALUES (@coche, @entrada, @salida, @multa, @tiempo, 1)"+
+                                "ON CONFLICT (matricula) DO UPDATE " +
+								"set fecha_y_hora_de_entrada = @entrada, " +
+								"fecha_y_hora_de_salida = @salida, " +
+								"tiempo_pagado = @tiempo, " +
+                                "multa = @multa;";
+
+            using (NpgsqlCommand command = new NpgsqlCommand(queryInsert, connection))
+             {
+                command.Parameters.AddWithValue("@coche", coches[cocheUso].getMatricula());
+                command.Parameters.AddWithValue("@entrada", globalVariables.getDia().AddMinutes(-datosParking[cocheUso].tiempoEstacionamiento));
+                command.Parameters.AddWithValue("@salida", globalVariables.getDia());
+                bool multa = false;
+                if(diferencia > 0) multa = true;
+                command.Parameters.AddWithValue("@multa", multa);
+                command.Parameters.AddWithValue("@tiempo", datosParking[cocheUso].tiempoReal/60);
+                command.ExecuteNonQuery();
+            }
+            connection.Close();
+        }
+    }   
 
     private void CheckNodeEntrada(){
         tiempo=0;

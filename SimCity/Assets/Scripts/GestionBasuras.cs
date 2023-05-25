@@ -29,6 +29,7 @@ public class GestionBasuras : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        camion.SetActive(false);
         open=false;
         globalVariables =  GameObject.Find("Plane").GetComponent<globalVariables>();
         nodosRuta=rutaCamion.GetComponentsInChildren<Node>();
@@ -133,11 +134,11 @@ public class GestionBasuras : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate(){
+    void Update(){
 
         if(globalVariables.getHoraDelDia() > 21600 && globalVariables.getHoraDelDia() < 84600){
             for (int i = 0; i < containers.Length; i++){
-                if (containers[i] < 100){
+                if (containers[i] < 94){
                     containers[i] += Random.Range(0.00001f, 0.00005f)*globalVariables.velocidadDia;
                 }
             }

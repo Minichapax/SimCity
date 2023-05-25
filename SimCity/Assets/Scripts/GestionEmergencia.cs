@@ -85,7 +85,15 @@ public class GestionEmergencia : MonoBehaviour
             sol.ToggleEmergencia(true);
             SelectEmergencia();
             camara.reiniciarCamara();
-            string planEmergencia="\nPlan de emergencias:\nSalir del edificio\nSalir del edificio\nSalir del edificio\nSalir del edificio\nSalir del edificio\nSalir del edificio";
+            string planEmergencia="\n\nPlan de emergencias:\nMantén la calma y busca refugio seguro.\n"+
+                "Comunícate con las autoridades y sigue las instrucciones recibidas.\n"+
+                "Ayuda a otros si es posible y seguro hacerlo.";
+
+            string plan2 = "\nPlan de emergencias:\nMantén la calma y evalúa la situación rápidamente.\n"+
+                "Busca un refugio seguro y comunica la emergencia a las autoridades competentes.\n"+
+                "Sigue las instrucciones y procedimientos establecidos para garantizar tu seguridad.";
+
+            if(Random.Range(0, 2) == 0) planEmergencia = plan2;
             panel.UpdateTexts("Edificio: "+emergenciaEdificio.getNombre()+planEmergencia);
             panel.setActive(true);
             luz.transform.position=emergenciaEdificio.transform.position + new Vector3(0,5,0);

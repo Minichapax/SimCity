@@ -2,16 +2,24 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - Camera_Script
+    - ClimaScript
+    - Coche
     - Cube
     - CubeEdificios
     - Edificio
+    - Emergencia
     - Farolaca
+    - GestionBasuras
+    - GestionEmergencia
+    - GestionParking
     - Light_Script
     - Node
+    - PanelCanvasBasuras
+    - PanelCanvasEmergencias
+    - PanelCanvasMulta
+    - PanelParadas
     - PeatonNode
     - RutaAutobus
-    - RutaCoche
-    - RutaCoche1
     - RutaPeaton
     - RutaPeaton1
     - RutaPeaton2
@@ -31,6 +39,7 @@ ScriptsOnlyBuild:
     - RutaPeatonSaliendo3
     - RutaPeatonSaliendo4
     - RutaPeatonSaliendo5
+    - TemperaturaScript
     - botonPararScript
     - farolasScript
     - globalVariables
@@ -46,15 +55,11 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
     - TMPro.TextMeshProUGUI
-    Unity.Timeline.Editor.dll:
-    - TimelineProjectSettings
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -106,8 +111,14 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.SpriteState
   methodsToPreserve:
   - assembly: Assembly-CSharp
+    fullTypeName: GestionParking
+    methodName: botonParking
+  - assembly: Assembly-CSharp
     fullTypeName: Camera_Script
     methodName: botonCamera
+  - assembly: Assembly-CSharp
+    fullTypeName: globalVariables
+    methodName: quitarApp
   - assembly: Assembly-CSharp
     fullTypeName: globalVariables
     methodName: toggleNocheDia
@@ -118,11 +129,17 @@ ScriptsOnlyBuild:
     fullTypeName: globalVariables
     methodName: changeVelocidad
   - assembly: Assembly-CSharp
+    fullTypeName: PanelParadas
+    methodName: botonParking
+  - assembly: Assembly-CSharp
     fullTypeName: globalVariables
     methodName: pararTiempo
   - assembly: Assembly-CSharp
     fullTypeName: botonPararScript
     methodName: changeBoton
+  - assembly: Assembly-CSharp
+    fullTypeName: GestionBasuras
+    methodName: botonBasura
   sceneClasses:
     Assets/Scene1.unity:
     - Class: 1
@@ -168,107 +185,125 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1704}
+      Script: {instanceID: 1706}
     - Class: 114
-      Script: {instanceID: 1730}
+      Script: {instanceID: 1772}
     - Class: 114
-      Script: {instanceID: 1770}
+      Script: {instanceID: 1782}
     - Class: 114
-      Script: {instanceID: 1780}
+      Script: {instanceID: 1824}
     - Class: 114
-      Script: {instanceID: 1822}
+      Script: {instanceID: 1858}
     - Class: 114
-      Script: {instanceID: 2168}
+      Script: {instanceID: 2052}
     - Class: 114
-      Script: {instanceID: 2322}
+      Script: {instanceID: 2174}
     - Class: 114
-      Script: {instanceID: 2438}
+      Script: {instanceID: 2252}
     - Class: 114
-      Script: {instanceID: 2452}
+      Script: {instanceID: 2330}
     - Class: 114
-      Script: {instanceID: 2536}
+      Script: {instanceID: 2446}
     - Class: 114
-      Script: {instanceID: 2548}
+      Script: {instanceID: 2460}
     - Class: 114
-      Script: {instanceID: 2680}
+      Script: {instanceID: 2506}
     - Class: 114
-      Script: {instanceID: 2742}
+      Script: {instanceID: 2510}
     - Class: 114
-      Script: {instanceID: 2934}
+      Script: {instanceID: 2560}
     - Class: 114
-      Script: {instanceID: 3210}
+      Script: {instanceID: 2622}
     - Class: 114
-      Script: {instanceID: 3298}
+      Script: {instanceID: 2694}
     - Class: 114
-      Script: {instanceID: 3376}
+      Script: {instanceID: 2726}
     - Class: 114
-      Script: {instanceID: 3462}
+      Script: {instanceID: 2748}
     - Class: 114
-      Script: {instanceID: 3656}
+      Script: {instanceID: 2760}
     - Class: 114
-      Script: {instanceID: 4082}
+      Script: {instanceID: 2952}
     - Class: 114
-      Script: {instanceID: 4186}
+      Script: {instanceID: 2996}
     - Class: 114
-      Script: {instanceID: 4268}
+      Script: {instanceID: 3128}
     - Class: 114
-      Script: {instanceID: 4304}
+      Script: {instanceID: 3232}
     - Class: 114
-      Script: {instanceID: 4416}
+      Script: {instanceID: 3320}
+    - Class: 114
+      Script: {instanceID: 3398}
+    - Class: 114
+      Script: {instanceID: 3484}
+    - Class: 114
+      Script: {instanceID: 3678}
+    - Class: 114
+      Script: {instanceID: 3958}
+    - Class: 114
+      Script: {instanceID: 4106}
+    - Class: 114
+      Script: {instanceID: 4210}
+    - Class: 114
+      Script: {instanceID: 4292}
+    - Class: 114
+      Script: {instanceID: 4328}
     - Class: 114
       Script: {instanceID: 4440}
     - Class: 114
-      Script: {instanceID: 4794}
+      Script: {instanceID: 4464}
     - Class: 114
-      Script: {instanceID: 5050}
+      Script: {instanceID: 4550}
     - Class: 114
-      Script: {instanceID: 5124}
+      Script: {instanceID: 4820}
     - Class: 114
-      Script: {instanceID: 5170}
+      Script: {instanceID: 5076}
     - Class: 114
-      Script: {instanceID: 5542}
+      Script: {instanceID: 5150}
     - Class: 114
-      Script: {instanceID: 5660}
+      Script: {instanceID: 5196}
     - Class: 114
-      Script: {instanceID: 5806}
+      Script: {instanceID: 5568}
     - Class: 114
-      Script: {instanceID: 5872}
+      Script: {instanceID: 5606}
     - Class: 114
-      Script: {instanceID: 6070}
+      Script: {instanceID: 5688}
     - Class: 114
-      Script: {instanceID: 6072}
+      Script: {instanceID: 5834}
     - Class: 114
-      Script: {instanceID: 6108}
+      Script: {instanceID: 5900}
     - Class: 114
-      Script: {instanceID: 6114}
+      Script: {instanceID: 6098}
     - Class: 114
-      Script: {instanceID: 6152}
+      Script: {instanceID: 6100}
     - Class: 114
-      Script: {instanceID: 6382}
+      Script: {instanceID: 6136}
     - Class: 114
-      Script: {instanceID: 6530}
+      Script: {instanceID: 6142}
     - Class: 114
-      Script: {instanceID: 6694}
+      Script: {instanceID: 6180}
     - Class: 114
-      Script: {instanceID: 6800}
+      Script: {instanceID: 6408}
     - Class: 114
-      Script: {instanceID: 6830}
+      Script: {instanceID: 6556}
     - Class: 114
-      Script: {instanceID: 7192}
+      Script: {instanceID: 6720}
     - Class: 114
-      Script: {instanceID: 7264}
+      Script: {instanceID: 6826}
     - Class: 114
-      Script: {instanceID: 7346}
+      Script: {instanceID: 6856}
     - Class: 114
-      Script: {instanceID: 7590}
+      Script: {instanceID: 7018}
     - Class: 114
-      Script: {instanceID: 7730}
+      Script: {instanceID: 7222}
     - Class: 114
-      Script: {instanceID: 179184}
+      Script: {instanceID: 7294}
     - Class: 114
-      Script: {instanceID: 187264}
+      Script: {instanceID: 7376}
     - Class: 114
-      Script: {instanceID: 264874}
+      Script: {instanceID: 7620}
+    - Class: 114
+      Script: {instanceID: 7760}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -338,6 +373,12 @@ ScriptsOnlyBuild:
     className: SignalAsset
   - hash:
       serializedVersion: 2
+      Hash: 9f39e926e3f42740b4d63006eed3e82e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GestionParking
+  - hash:
+      serializedVersion: 2
       Hash: 0dbc3be398b4869a5c8d0d8481ee402c
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -380,10 +421,22 @@ ScriptsOnlyBuild:
     className: SimpleScript
   - hash:
       serializedVersion: 2
+      Hash: 11c3610ce10e8e8be2758fca58f61637
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GestionBasuras
+  - hash:
+      serializedVersion: 2
       Hash: a83d5555db79b77b56e71b40a5b47c5b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Farolaca
+  - hash:
+      serializedVersion: 2
+      Hash: 099689dbb8bef3c1b52ea280f1f183b2
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RutaPeatonAndando2
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -434,6 +487,18 @@ ScriptsOnlyBuild:
     className: RawImage
   - hash:
       serializedVersion: 2
+      Hash: 099689dbb8bef3c1b52ea280f1f183b2
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RutaPeatonAndando3
+  - hash:
+      serializedVersion: 2
+      Hash: 7af66c71cffa8488d3e84282c0b0629e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Emergencia
+  - hash:
+      serializedVersion: 2
       Hash: 3299fc1f91f465bc3eb6e7c28427da4b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -444,6 +509,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Light_Script
+  - hash:
+      serializedVersion: 2
+      Hash: 1a3502a2a294d2a9f98267e5b69b77b5
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GestionEmergencia
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -458,10 +529,22 @@ ScriptsOnlyBuild:
     className: botonPararScript
   - hash:
       serializedVersion: 2
+      Hash: 0e2f33c13107d50965b4af3984726b9e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PanelCanvasBasuras
+  - hash:
+      serializedVersion: 2
       Hash: 27e5341178f188b89bdc6495710b590c
     assemblyName: Assembly-CSharp.dll
     namespaceName: TMPro.Examples
     className: Benchmark01_UGUI
+  - hash:
+      serializedVersion: 2
+      Hash: f250d5d6f5e1fe26b09a22a1ec5b8f32
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Coche
   - hash:
       serializedVersion: 2
       Hash: cc4274b586df3c02688bac01b88bd16c
@@ -543,6 +626,12 @@ ScriptsOnlyBuild:
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: CubeEdificios
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnButtonClickMessageListener
@@ -564,6 +653,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnDropdownValueChangedMessageListener
+  - hash:
+      serializedVersion: 2
+      Hash: 0e2f33c13107d50965b4af3984726b9e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PanelCanvasEmergencias
   - hash:
       serializedVersion: 2
       Hash: 0784d4fd5b93bd75440d01eb2fac4233
@@ -740,6 +835,12 @@ ScriptsOnlyBuild:
     className: EnvMapAnimator
   - hash:
       serializedVersion: 2
+      Hash: 54de650331aecb6f07dbdd25cc65e8c7
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TemperaturaScript
+  - hash:
+      serializedVersion: 2
       Hash: bd3f0ca738703903e759f77536ed74fd
     assemblyName: Assembly-CSharp.dll
     namespaceName: TMPro.Examples
@@ -864,6 +965,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: TMPro.Examples
     className: TMP_ExampleScript_01
+  - hash:
+      serializedVersion: 2
+      Hash: 0e2f33c13107d50965b4af3984726b9e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PanelParadas
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -1052,6 +1159,12 @@ ScriptsOnlyBuild:
     className: globalVariables
   - hash:
       serializedVersion: 2
+      Hash: 0e2f33c13107d50965b4af3984726b9e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PanelCanvasMulta
+  - hash:
+      serializedVersion: 2
       Hash: 4f60ff347d4efee4ef8cc7f627735018
     assemblyName: Assembly-CSharp.dll
     namespaceName: TMPro.Examples
@@ -1088,7 +1201,7 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: 54de650331aecb6f07dbdd25cc65e8c7
+      Hash: d1654f26d142e46898c9f56a2f6a7018
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: horaScript
@@ -1322,6 +1435,12 @@ ScriptsOnlyBuild:
     className: SignalTrack
   - hash:
       serializedVersion: 2
+      Hash: d9d8d0a249d3f9cc58b96e3241a9fb90
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ClimaScript
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
@@ -1470,25 +1589,7 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
-  - hash:
-      serializedVersion: 2
-      Hash: 099689dbb8bef3c1b52ea280f1f183b2
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: RutaPeatonAndando2
-  - hash:
-      serializedVersion: 2
-      Hash: 099689dbb8bef3c1b52ea280f1f183b2
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: RutaPeatonAndando3
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: CubeEdificios
   platform: 19
   scenePathNames:
   - Assets/Scene1.unity
-  playerPath: C:/Users/minic/Desktop/SimCity/New Unity Project.exe
+  playerPath: C:/Users/minic/Desktop/SimCity-0.33/SimCity.exe

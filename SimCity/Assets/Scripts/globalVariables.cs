@@ -110,4 +110,8 @@ public class globalVariables : MonoBehaviour
             break;
         }
     }
+
+    public void quitarApp(){
+        Application.Quit();
+    }
 }

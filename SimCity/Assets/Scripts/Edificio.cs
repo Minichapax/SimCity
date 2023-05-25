@@ -21,12 +21,12 @@ public class Edificio : MonoBehaviour
     private globalVariables globalVariables;
 
 
-    // static NpgsqlConnection GetConnection()
-    // {
-    //     string connectionString = "Host=localhost;Username=alumnogreibd;Password=greibd2015;Database=campusInteligente";
-    //     NpgsqlConnection connection = new NpgsqlConnection(connectionString);
-    //     return connection;
-    // }
+    static NpgsqlConnection GetConnection()
+    {
+        string connectionString = "Host=localhost;Username=alumnogreibd;Password=greibd2015;Database=campusInteligente";
+         NpgsqlConnection connection = new NpgsqlConnection(connectionString);
+         return connection;
+    }
 
     public string getString(){
         string text = "Edificio: "+ Nombre +
@@ -43,22 +43,22 @@ public class Edificio : MonoBehaviour
         globalVariables =  GameObject.Find("Plane").GetComponent<globalVariables>();
         
 
-        // using (NpgsqlConnection connection = GetConnection())
-        // {
-        //     connection.Open();
-        //     string queryInsert = "INSERT INTO edificio (nombre, calle, nombre_campus )"+
-        //                         "VALUES (@Nombre, @Calle, @Campus)"+
-        //                         "ON CONFLICT DO NOTHING";
+        using (NpgsqlConnection connection = GetConnection())
+        {
+            connection.Open();
+            string queryInsert = "INSERT INTO edificio (nombre, calle, nombre_campus )"+
+                                "VALUES (@Nombre, @Calle, @Campus)"+
+                                "ON CONFLICT DO NOTHING";
 
-        //     using (NpgsqlCommand command = new NpgsqlCommand(queryInsert, connection))
-        //     {
-        //         command.Parameters.AddWithValue("@Nombre", Nombre);
-        //         command.Parameters.AddWithValue("@Calle", Calle);
-        //         command.Parameters.AddWithValue("@Campus", Campus);
-        //         command.ExecuteNonQuery();
-        //     }
-        //     connection.Close();
-        // }
+            using (NpgsqlCommand command = new NpgsqlCommand(queryInsert, connection))
+             {
+                command.Parameters.AddWithValue("@Nombre", Nombre);
+                command.Parameters.AddWithValue("@Calle", Calle);
+                command.Parameters.AddWithValue("@Campus", Campus);
+                command.ExecuteNonQuery();
+            }
+            connection.Close();
+        }
     }   
 
     private void updateValues(){
@@ -79,26 +79,26 @@ public class Edificio : MonoBehaviour
 
     public void insertSensores()
     {
-        // using (NpgsqlConnection connection = GetConnection())
-        // {
-        //     connection.Open();
-        //     string queryInsert = "INSERT INTO mediciones_edificio (nombre_edificio, contaminacion, fecha_y_hora_contaminacion, consumo_luz, fecha_y_hora_luz, consumo_agua, fecha_y_hora_agua, consumo_gas, fecha_y_hora_gas, temperatura, fecha_y_hora_temperatura)"+
-        //                         "VALUES (@Nombre, @Contaminacion, @Fecha, @ConsumoLuz, @Fecha, @ConsumoAgua, @Fecha, @ConsumoGas, @Fecha, @Temperatura, @Fecha)";
+         using (NpgsqlConnection connection = GetConnection())
+         {
+             connection.Open();
+             string queryInsert = "INSERT INTO mediciones_edificio (nombre_edificio, contaminacion, fecha_y_hora_contaminacion, consumo_luz, fecha_y_hora_luz, consumo_agua, fecha_y_hora_agua, consumo_gas, fecha_y_hora_gas, temperatura, fecha_y_hora_temperatura)"+
+                                 "VALUES (@Nombre, @Contaminacion, @Fecha, @ConsumoLuz, @Fecha, @ConsumoAgua, @Fecha, @ConsumoGas, @Fecha, @Temperatura, @Fecha)";
 
-        //     using (NpgsqlCommand command = new NpgsqlCommand(queryInsert, connection))
-        //     {
-        //         command.Parameters.AddWithValue("@Nombre", Nombre);
-        //         command.Parameters.AddWithValue("@Contaminacion", Contaminacion);
-        //         command.Parameters.AddWithValue("@ConsumoLuz", ConsumoLuz);
-        //         command.Parameters.AddWithValue("@ConsumoAgua", ConsumoAgua);
-        //         command.Parameters.AddWithValue("@ConsumoGas", ConsumoGas);
-        //         command.Parameters.AddWithValue("@Temperatura", Temperatura);
-        //         command.Parameters.AddWithValue("@Fecha", fecha);
+             using (NpgsqlCommand command = new NpgsqlCommand(queryInsert, connection))
+             {
+                 command.Parameters.AddWithValue("@Nombre", Nombre);
+                 command.Parameters.AddWithValue("@Contaminacion", Contaminacion);
+                 command.Parameters.AddWithValue("@ConsumoLuz", ConsumoLuz);
+                 command.Parameters.AddWithValue("@ConsumoAgua", ConsumoAgua);
+                 command.Parameters.AddWithValue("@ConsumoGas", ConsumoGas);
+                 command.Parameters.AddWithValue("@Temperatura", Temperatura);
+                 command.Parameters.AddWithValue("@Fecha", fecha);
 
-        //         command.ExecuteNonQuery();
-        //     }
-        //     connection.Close();
-        // }
+                 command.ExecuteNonQuery();
+             }
+             connection.Close();
+         }
     }
     void Update()
     {
