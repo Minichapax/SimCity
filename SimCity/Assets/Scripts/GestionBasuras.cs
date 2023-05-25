@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class GestionBasuras : MonoBehaviour
 {
     public GameObject contenedores;
@@ -23,15 +23,18 @@ public class GestionBasuras : MonoBehaviour
     private float tiempo;
     private float distancia;
     private float tiempoParada=0;
+
+    private DateTime anteriorDia;
     static Vector3 posicionActual;
     static Vector3 posicionAnterior;
     private int num_nodo;
     // Start is called before the first frame update
     void Start()
-    {
+    {        
+        globalVariables =  GameObject.Find("Plane").GetComponent<globalVariables>();
+        anteriorDia = globalVariables.getDia();
         camion.SetActive(false);
         open=false;
-        globalVariables =  GameObject.Find("Plane").GetComponent<globalVariables>();
         nodosRuta=rutaCamion.GetComponentsInChildren<Node>();
         for (int i = 0; i < containers.Length; i++){
             containers[i]=80;
@@ -136,26 +139,32 @@ public class GestionBasuras : MonoBehaviour
     // Update is called once per frame
     void Update(){
 
-        if(globalVariables.getHoraDelDia() > 21600 && globalVariables.getHoraDelDia() < 84600){
+        if(globalVariables.getDia().Day != anteriorDia.Day) { 
+            pasoCamion = false;
+            anteriorDia = globalVariables.getDia();
+        }
+
+        if(globalVariables.getHoraDelDia() > 21600){
             for (int i = 0; i < containers.Length; i++){
-                if (containers[i] < 94){
-                    containers[i] += Random.Range(0.00001f, 0.00005f)*globalVariables.velocidadDia;
+                if (containers[i] < 94f){
+                    containers[i] += UnityEngine.Random.Range(0.00001f, 0.00005f)*globalVariables.velocidadDia;
                 }
             }
             calcularMedia();
         }
 
         if(globalVariables.getHoraDelDia() > 84600){
+            
             for (int i = 0; i < containers.Length; i++){
-                if (containers[i] < 94){
-                    containers[i] += Random.Range(0, 5);
+                if (containers[i] < 94f){
+                    containers[i] += UnityEngine.Random.Range(0, 5);
                 }
             }
             calcularMedia();
         }
     
-        if(globalVariables.getHoraDelDia() > 3600 && globalVariables.getHoraDelDia() < 5400 && !pasoCamion){
-            pasoCamion=true;
+        if(globalVariables.getHoraDelDia() > 3600  && !pasoCamion){
+            pasoCamion = true;
             camionPasando=true;
             camion.SetActive(true);
             num_nodo=0;
