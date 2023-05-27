@@ -6,7 +6,7 @@ public class Farolaca : MonoBehaviour
 {
     private bool farolaOn; 
     private bool nearPersonBool = false;
-    public Light miLuz;
+    private Light miLuz;
     // Start is called before the first frame update
     void Start()
     {

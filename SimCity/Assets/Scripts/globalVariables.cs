@@ -21,7 +21,7 @@ public class globalVariables : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         horaDelDia += Time.deltaTime * velocidadDia;
         if (horaDelDia >= 86400){ 

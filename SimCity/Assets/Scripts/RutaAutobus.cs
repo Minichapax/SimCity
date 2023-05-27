@@ -34,12 +34,12 @@ public class RutaAutobus : MonoBehaviour
     private float tiempoParada;
 
 
-     static NpgsqlConnection GetConnection()
-     {
-         string connectionString = "Host=localhost;Username=alumnogreibd;Password=greibd2015;Database=campusInteligente";
-         NpgsqlConnection connection = new NpgsqlConnection(connectionString);
-         return connection;
-     }
+    static NpgsqlConnection GetConnection()
+    {
+        string connectionString = "Host=localhost;Username=alumnogreibd;Password=greibd2015;Database=campusInteligente";
+        NpgsqlConnection connection = new NpgsqlConnection(connectionString);
+        return connection;
+    }
 
     private void insertParadas(int parada){
          using (NpgsqlConnection connection = GetConnection())
